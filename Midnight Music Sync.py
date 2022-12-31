@@ -33,9 +33,14 @@ def wait_for_drop(drop_timestamp: float):
     while datetime.datetime.now().timestamp() < drop_timestamp:
         time.sleep(0.01)
 
+def get_target_date() -> str:
+    """Gets the target date for which day the music should drop at."""
+    return input("Enter the desired target date in the following format: (DD/MM/YYYY): ")
 
-# In[ ]:
 
+def get_target_time() -> str:
+    """Gets the target time for when the music should drop at."""
+    return input("Enter the desired target time in the following format: HH:MM:SS: ")
 
 def play_track(track_length: float, drop_time: float, target_date: str, target_time: str = "00:00:00"):
     # Configure logging
