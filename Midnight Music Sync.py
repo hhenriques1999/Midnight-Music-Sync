@@ -41,7 +41,11 @@ def get_target_date() -> str:
 
 def get_target_time() -> str:
     """Gets the target time for when the music should drop at."""
-    return input("Enter the desired target time in the following format: HH:MM:SS: ")
+    target_time = input("Enter the desired target time in the following format HH:MM:SS (24H)\n[empty defaults to midnight]: ")
+    if target_time == "":
+        return None
+    else:
+        return target_time
 
 
 def play_track(track_length: float, drop_time: float, target_date: str, target_time: str = "00:00:00"):
