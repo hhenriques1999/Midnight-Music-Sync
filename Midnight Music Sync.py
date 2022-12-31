@@ -1,16 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import datetime
-import subprocess
 import logging
+import subprocess
 import time
-
-
-# In[2]:
 
 
 def get_time(purpose: str):
@@ -22,22 +13,9 @@ def get_time(purpose: str):
     return time
 
 
-# In[3]:
-
-
-track_length = get_time("track length")
-drop_time = get_time("drop time")
-
-
-# In[11]:
-
-
 def get_target_datetime(target_date: str, target_time: str = "00:00:00") -> datetime.datetime:
     """Parses the target date and time strings to create a datetime object."""
     return datetime.datetime.strptime(f"{target_date} {target_time}", "%d/%m/%Y %H:%M:%S")
-
-
-# In[12]:
 
 
 def get_drop_timestamp(target_datetime: datetime.datetime, drop_time: float) -> float:
@@ -45,15 +23,9 @@ def get_drop_timestamp(target_datetime: datetime.datetime, drop_time: float) -> 
     return (target_datetime - datetime.timedelta(seconds=drop_time)).timestamp()
 
 
-# In[13]:
-
-
 def get_drop_datetime(drop_timestamp: float) -> datetime.datetime:
     """Converts the drop timestamp to a datetime object."""
     return datetime.datetime.fromtimestamp(drop_timestamp)
-
-
-# In[14]:
 
 
 def wait_for_drop(drop_timestamp: float):
@@ -96,15 +68,9 @@ def play_track(track_length: float, drop_time: float, target_date: str, target_t
     subprocess.run([r"C:\Program Files\AIMP\AIMP.exe", track_path])
 
 
-# In[8]:
-
-
-# Example usage
-play_track(track_length, drop_time, "31/12/2022", "00:42:00")
-
-
-# In[ ]:
-
-
-
-
+if __name__ == "__main__":
+    track_length = get_time("track length")
+    drop_time = get_time("drop time")
+    target_date = get_target_date()
+    target_time = get_target_time()
+    play_track(track_length, drop_time, target_date, target_time)
