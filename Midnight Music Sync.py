@@ -33,6 +33,7 @@ def wait_for_drop(drop_timestamp: float):
     while datetime.datetime.now().timestamp() < drop_timestamp:
         time.sleep(0.01)
 
+
 def get_target_date() -> str:
     """Gets the target date for which day the music should drop at."""
     return input("Enter the desired target date in the following format: (DD/MM/YYYY): ")
@@ -42,33 +43,36 @@ def get_target_time() -> str:
     """Gets the target time for when the music should drop at."""
     return input("Enter the desired target time in the following format: HH:MM:SS: ")
 
+
 def play_track(track_length: float, drop_time: float, target_date: str, target_time: str = "00:00:00"):
     # Configure logging
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
-    
+    logging.basicConfig(level=logging.INFO,
+                        format="%(asctime)s - %(levelname)s - %(message)s")
+
     # Ask the user for the path to the track
     track_path = input("Enter the path to the track: ")
-    
+
     # Get the target datetime, drop timestamp, and drop datetime
     target_datetime = get_target_datetime(target_date, target_time)
     drop_timestamp = get_drop_timestamp(target_datetime, drop_time)
     drop_datetime = get_drop_datetime(drop_timestamp)
-    
+
     # Check if it is possible to reach the target date and time
     if datetime.datetime.now() + datetime.timedelta(seconds=drop_time) > target_datetime:
         logging.error("It is not possible to reach the target date and time")
         return
-    
+
     logging.info(f"Track length: {track_length}")
     logging.info(f"Drop time: {drop_time}")
     logging.info(f"Target date: {target_date}")
     logging.info(f"Target time: {target_time}")
-    logging.info(f"Drop timestamp and datetime: {drop_timestamp} => {drop_datetime}")
-    
+    logging.info(
+        f"Drop timestamp and datetime: {drop_timestamp} => {drop_datetime}")
+
     # Wait for the drop timestamp to be reached
     wait_for_drop(drop_timestamp)
     logging.info("Drop timestamp reached")
-    
+
     # Open the application and start playing the track
     subprocess.run([r"C:\Program Files\AIMP\AIMP.exe", track_path])
 
