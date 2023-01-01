@@ -5,6 +5,7 @@ import time
 
 MUSIC_PLAYER_PATH = r"C:\Program Files\AIMP\AIMP.exe"
 
+
 def get_time(purpose: str):
     print(f"Enter the {purpose}:")
     minutes = int(input("Enter the number of minutes: "))
@@ -82,12 +83,14 @@ def play_track(track_length: float, drop_time: float, target_date: str, target_t
     # Open the application and start playing the track
     subprocess.run([MUSIC_PLAYER_PATH, track_path])
 
+
 def main():
     track_length = get_time("track length")
     drop_time = get_time("drop time")
     target_date = get_target_date()
     target_time = get_target_time()
     play_track(track_length, drop_time, target_date, target_time)
+
 
 if __name__ == "__main__":
     main()
