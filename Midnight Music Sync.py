@@ -3,6 +3,7 @@ import logging
 import subprocess
 import time
 
+MUSIC_PLAYER_PATH = r"C:\Program Files\AIMP\AIMP.exe"
 
 def get_time(purpose: str):
     print(f"Enter the {purpose}:")
@@ -49,6 +50,7 @@ def get_target_time() -> str:
 
 
 def play_track(track_length: float, drop_time: float, target_date: str, target_time: str = "00:00:00"):
+    """Plays the track at the specified target date and time"""
     # Configure logging
     logging.basicConfig(level=logging.INFO,
                         format="%(asctime)s - %(levelname)s - %(message)s")
@@ -78,12 +80,14 @@ def play_track(track_length: float, drop_time: float, target_date: str, target_t
     logging.info("Drop timestamp reached")
 
     # Open the application and start playing the track
-    subprocess.run([r"C:\Program Files\AIMP\AIMP.exe", track_path])
+    subprocess.run([MUSIC_PLAYER_PATH, track_path])
 
-
-if __name__ == "__main__":
+def main():
     track_length = get_time("track length")
     drop_time = get_time("drop time")
     target_date = get_target_date()
     target_time = get_target_time()
     play_track(track_length, drop_time, target_date, target_time)
+
+if __name__ == "__main__":
+    main()
